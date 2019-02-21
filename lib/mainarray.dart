@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 int x = 0;
 int y = 0;
 
-List<List<bool>> grid = new List.generate(9, (i) => new List(5));
+List<List<bool>> grid = new List.generate(5, (i) => new List(9));
 void generateBoard(){
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[0].length; j++) {
@@ -13,7 +13,7 @@ void generateBoard(){
 }
 
 void playerSpawn(){
-  grid[0][0] = true;
+  grid[3][0] = true;
 }
 
 bool playerLocation(){
@@ -71,6 +71,30 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void moveDown(){
+    setState(() {
+      grid[x][y] = false;
+      grid[x][y-1] = true;
+      playerLocation();
+    });
+  }
+
+  void moveLeft(){
+    setState(() {
+      grid[x][y] = false;
+      grid[x-1][y] = true;
+      playerLocation();
+    });
+  }
+
+  void moveRight(){
+    setState(() {
+      grid[x][y] = false;
+      grid[x+1][y] = true;
+      playerLocation();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,14 +102,54 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         body: Center(
-          child: Text("The player is currently at " + x.toString() + ", " +
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("The player is currently at " + x.toString() + ", " +
               y.toString() + "."),
+              FlatButton(
+                onPressed: moveUp,
+                child: Column(
+                  children: <Widget>[
+                    Icon(Icons.keyboard_arrow_up),
+                    Text("Move Up")
+                  ],
+                ),
+              ),
+              Row(
+                children: <Widget>[
+                FlatButton(
+                  onPressed: moveLeft,
+                  child: Column(
+                    children: <Widget>[
+                      Icon(Icons.keyboard_arrow_left),
+                      Text("Move Left")
+                    ],
+                  ),
+                ),
+                FlatButton(
+                  onPressed: moveDown,
+                  child: Column(
+                    children: <Widget>[
+                      Icon(Icons.keyboard_arrow_down),
+                      Text("Move Down")
+                    ],
+                  ),
+                ),
+                FlatButton(
+                  onPressed: moveRight,
+                  child: Column(
+                    children: <Widget>[
+                      Icon(Icons.keyboard_arrow_right),
+                      Text("Move Right")
+                    ],
+                  ),
+                ),
+                ],
+              ),
+            ],
+          ),
         ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: moveUp,
-        tooltip: 'Move Up',
-        child: Icon(Icons.add),
-      ),
     );
   }
 
