@@ -4,20 +4,42 @@ int x = 0;
 int y = 0;
 
 //Generates initial board
-//Needs to account for different halves
 List<List<String>> grid = new List.generate(9, (i) => new List(5));
 void generateBoard(){
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[0].length; j++) {
-      grid[i][j] = "o";
+      if(i == 4 && j == 2){ // Tower location
+        grid[i][j] = "T";
+      }
+      else if(i == 0 && j == 2){ // Earthly Gate Location
+        grid[i][j] = "A";
+      }
+      else if(i == 8 && j == 2){ // Enchanted Gate Location
+        grid[i][j] = "N";
+      }
+      else if(i < 4){ // Sets bottom of board to yellow(Earthly) tiles
+        grid[i][j] = "y";
+      }
+      else if(i > 4){ // Sets top of board to pink(Enchanted) tiles
+        grid[i][j] = "p";
+      }
+      else if(i == 4 && j > 2){ // Makes tiles to left of tower pink(Enchanted)
+        grid[i][j] = "p";
+      }
+      else if(i == 4 && j < 2){ // Makes tiles to right of tower yellow(Earthly)
+        grid[i][j] = "y";
+      }
+      else{ // Makes a dash if mistake occurs
+        grid[i][j] = "-";
+      }
     }
   }
 }
 
 void playerSpawn(){
   grid[0][2] = "x";
-  x = 0;
-  y = 2;
+  x = 2;
+  y = 0;
 }
 
 //To be implemented to find play position potentially replacing x and y variables
@@ -25,8 +47,8 @@ bool playerLocation(){
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[0].length; j++) {
       if(grid[i][j] == "x"){
-        x = i;
-        y = j;
+        x = j;
+        y = i;
         return true;
       }
     }
@@ -60,38 +82,67 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // setTile returns the tile the player moved from to the previous letter
+  // Certain locations are set while others are just a color based on position
+  // on board
+  void setTile(){
+    if(y == 4 && x == 2){ // Tower location
+      grid[y][x] = "T";
+    }
+    else if(y == 0 && x == 2){ // Earthly Gate Location
+      grid[y][x] = "A";
+    }
+    else if(y == 8 && x == 2){ // Enchanted Gate Location
+      grid[y][x] = "N";
+    }
+    else if(y < 4){ // Sets bottom of board to yellow(Earthly) tiles
+      grid[y][x] = "y";
+    }
+    else if(y > 4){ // Sets top of board to pink(Enchanted) tiles
+      grid[y][x] = "p";
+    }
+    else if(y == 4 && x > 2){ // Makes tiles to left of tower pink(Enchanted)
+      grid[y][x] = "p";
+    }
+    else if(y == 4 && x < 2){ // Makes tiles to right of tower yellow(Earthly)
+      grid[y][x] = "y";
+    }
+    else{ // Makes a dash if mistake occurs
+      grid[y][x] = "-";
+    }
+  }
   //Move functions move the player based on direction of function
   //Replaces previous spot player was on with o, changes new tile player is on to x
-  //x and y are currently reversed due to a mistake in representing the x and y axis
-  //Changing x value moves up and down, y moves right to left
+  //x and y should be fixed
+  //Changing y value moves up and down, x moves right or left
   void moveUp(){
     setState(() {
-      grid[x][y] = "o";
-      grid[x+1][y] = "x";
+      setTile();
+      grid[y+1][x] = "x";
       playerLocation();
     });
   }
 
   void moveDown(){
     setState(() {
-      grid[x][y] = "o";
-      grid[x-1][y] = "x";
+      setTile();
+      grid[y-1][x] = "x";
       playerLocation();
     });
   }
 
   void moveLeft(){
     setState(() {
-      grid[x][y] = "o";
-      grid[x][y+1] = "x";
+      setTile();
+      grid[y][x+1] = "x";
       playerLocation();
     });
   }
 
   void moveRight(){
     setState(() {
-      grid[x][y] = "o";
-      grid[x][y-1] = "x";
+      setTile();
+      grid[y][x-1] = "x";
       playerLocation();
     });
   }
