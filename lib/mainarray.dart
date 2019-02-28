@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:the_mystic_woodv3/pictoarrary.dart';
 
 int x = 0;
 int y = 0;
+
+// TODO: Create an array of images to be assigned a letter in the board array
+// Not currently in use
+List<pictoarray> images = new List(45);
+void createImages() {
+  //for (int i = 0; i < 45; i++) {
+    images[0] = new pictoarray("idk", 'asset/00.png', "T");
+    images[1] = new pictoarray("idk", 'asset/01.jpg', "N");
+    images[2] = new pictoarray("idk", 'asset/02.jpg', "A");
+    images[3] = new pictoarray("idk", 'asset/03.jpg', "y");
+    images[4] = new pictoarray("idk", 'asset/04.jpg', "p");
+  //}
+}
 
 //Generates initial board
 List<List<String>> grid = new List.generate(9, (i) => new List(5));
@@ -58,6 +72,7 @@ bool playerLocation(){
 
 void main(){
   generateBoard();
+  createImages();
   playerSpawn();
   runApp(MyApp());
 }
@@ -109,6 +124,20 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     else{ // Makes a dash if mistake occurs
       grid[y][x] = "-";
+    }
+  }
+
+  // TODO: implement a way for the board letters to be replaced by images
+  // Not currently in use
+  void image2Board(){
+    for (int i = 0; i < grid.length; i++) {
+      for (int j = 0; j < grid[0].length; j++) {
+        for (int k = 0; k < images.length; k++) {
+          if (images[k].getID() == grid[i][j]) {
+            grid[i][j] = images[k].getImageURL();
+          }
+        }
+      }
     }
   }
   //Move functions move the player based on direction of function
@@ -172,6 +201,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Text(board2String(),
                 textScaleFactor: 2.0, //Changes the font size  better way?
               ),
+              // TODO: Display the board/array as images instead of letters
+              //Image.asset(images[0].getImageURL(), height: 120.0, width: 120.0),
               FlatButton(
                 onPressed: moveUp,
                 child: Column(
