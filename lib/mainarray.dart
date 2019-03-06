@@ -4,17 +4,38 @@ import 'package:the_mystic_woodv3/pictoarrary.dart';
 int x = 0;
 int y = 0;
 
-// TODO: Create an array of images to be assigned a letter in the board array
-// Not currently in use
+// Assigns images to values in the original grid/String array
 List<pictoarray> images = new List(45);
 void createImages() {
-  //for (int i = 0; i < 45; i++) {
-    images[0] = new pictoarray("idk", 'asset/00.png', "T");
-    images[1] = new pictoarray("idk", 'asset/01.jpg', "N");
-    images[2] = new pictoarray("idk", 'asset/02.jpg', "A");
-    images[3] = new pictoarray("idk", 'asset/03.jpg', "y");
-    images[4] = new pictoarray("idk", 'asset/04.jpg', "p");
-  //}
+  int k = 0;
+  for (int i = 0; i < grid.length; i++) {
+    for (int j = 0; j < grid[0].length; j++) {
+      if (grid[i][j] == "y"){
+        images[k] = new pictoarray(j, i, 'asset/03.jpg', grid[i][j]);
+        k++;
+      }
+      else if (grid[i][j] == "p"){
+        images[k] = new pictoarray(j, i, 'asset/01.jpg', grid[i][j]);
+        k++;
+      }
+      else if (grid[i][j] == "A"){
+        images[k] = new pictoarray(j, i, 'asset/04.jpg', grid[i][j]);
+        k++;
+      }
+      else if (grid[i][j] == "N"){
+        images[k] = new pictoarray(j, i, 'asset/02.jpg', grid[i][j]);
+        k++;
+      }
+      else if (grid[i][j] == "T"){
+        images[k] = new pictoarray(j, i, 'asset/05.jpg', grid[i][j]);
+        k++;
+      }
+      else{
+        images[k] = new pictoarray(j, i, 'asset/06.jpg', grid[i][j]);
+        k++;
+      }
+    }
+  }
 }
 
 //Generates initial board
@@ -128,17 +149,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // TODO: implement a way for the board letters to be replaced by images
-  // Not currently in use
-  void image2Board(){
-    for (int i = 0; i < grid.length; i++) {
-      for (int j = 0; j < grid[0].length; j++) {
-        for (int k = 0; k < images.length; k++) {
-          if (images[k].getID() == grid[i][j]) {
-            grid[i][j] = images[k].getImageURL();
-          }
-        }
-      }
+  // Not currently in use/May not be needed
+  List<String> image2Board(){
+    List<String> test = new List(45);
+    //int k = 0;
+    for (int i = 0; i < images.length; i++) {
+      test[i] = images[i].getImageURL();
     }
+    return test;
   }
   //Move functions move the player based on direction of function
   //Replaces previous spot player was on with o, changes new tile player is on to x
@@ -188,6 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return board;
   }
 
+  // TODO: Tidy up code a bit. Possibly break up into smaller functions.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -198,10 +217,65 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(board2String(),
-                textScaleFactor: 2.0, //Changes the font size  better way?
+              new Expanded(child: GridView.count(
+                primary: false,
+                crossAxisCount: 5,
+                crossAxisSpacing: 2.0,
+                children: <Widget>[
+                  Image.asset(images[44].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[43].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[42].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[41].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[40].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[39].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[38].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[37].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[36].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[35].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[34].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[33].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[32].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[31].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[30].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[29].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[28].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[27].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[26].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[25].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[24].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[23].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[22].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[21].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[20].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[19].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[18].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[17].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[16].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[15].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[14].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[13].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[12].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[11].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[10].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[9].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[8].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[7].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[6].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[5].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[4].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[3].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[2].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[1].getImageURL(), height: 120.0, width: 120.0,),
+                  Image.asset(images[0].getImageURL(), height: 120.0, width: 120.0,),
+              //Image.asset(image2Board().toString(), height: 120.0, width: 120.0),
+                  /*Text(board2String(),
+                    textScaleFactor: 2.0, //Changes the font size  better way?
+                  ), */
+
+                ],
               ),
-              // TODO: Display the board/array as images instead of letters
+              ),
+
               //Image.asset(images[0].getImageURL(), height: 120.0, width: 120.0),
               FlatButton(
                 onPressed: moveUp,
@@ -211,7 +285,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     Text("Move Up")
                   ],
                 ),
-              ),
+                ),
+
               Row(  //Contains move buttons left, down, and up displayed like keyboard arrow keys
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
