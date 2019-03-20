@@ -4,30 +4,47 @@ import 'package:the_mystic_woodv3/pictoarrary.dart';
 int x = 0;
 int y = 0;
 
+List<String> yellow = new List(21);
+List<String> pink = new List(21);
+
+void randomize(){
+  for (int i = 0; i < yellow.length; i++){
+    yellow[i] = 'asset/yellow/' + (i+1).toString() + '.png';
+    pink[i] = 'asset/pink/' + (i+1).toString() + '.png';
+  }
+  yellow.shuffle();
+  pink.shuffle();
+}
+
 // Assigns images to values in the original grid/String array
 List<pictoarray> images = new List(45);
 void createImages() {
   int k = 0;
+  int p = 0;
+  int y = 0;
+
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[0].length; j++) {
       if (grid[i][j] == "y"){
-        images[k] = new pictoarray(j, i, 'asset/03.jpg', grid[i][j]);
+        images[k] = new pictoarray(j, i, yellow[y], grid[i][j]);
         k++;
+        y++;
       }
       else if (grid[i][j] == "p"){
-        images[k] = new pictoarray(j, i, 'asset/01.jpg', grid[i][j]);
+        images[k] = new pictoarray(j, i, pink[p], grid[i][j]);
         k++;
+        p++;
       }
       else if (grid[i][j] == "A"){
-        images[k] = new pictoarray(j, i, 'asset/04.jpg', grid[i][j]);
+        images[k] = new pictoarray(j, i, 'asset/yellow/Gate.png', grid[i][j]);
         k++;
       }
       else if (grid[i][j] == "N"){
-        images[k] = new pictoarray(j, i, 'asset/02.jpg', grid[i][j]);
+        images[k] = new pictoarray(j, i, 'asset/pink/Gate.png', grid[i][j]);
         k++;
       }
       else if (grid[i][j] == "T"){
-        images[k] = new pictoarray(j, i, 'asset/05.jpg', grid[i][j]);
+        images[k] = new pictoarray(j, i, 'asset/Tower.png', grid[i][j]);
         k++;
       }
       else{
@@ -93,6 +110,7 @@ bool playerLocation(){
 
 void main(){
   generateBoard();
+  randomize();
   createImages();
   playerSpawn();
   runApp(MyApp());
@@ -220,7 +238,7 @@ class _MyHomePageState extends State<MyHomePage> {
               new Expanded(child: GridView.count(
                 primary: false,
                 crossAxisCount: 5,
-                childAspectRatio: 46.0 / 31.0,
+                childAspectRatio: 900.0 / 586.0,
                 children: <Widget>[
                   Image.asset(images[44].getImageURL()),
                   Image.asset(images[43].getImageURL()),
