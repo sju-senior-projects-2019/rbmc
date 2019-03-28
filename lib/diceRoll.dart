@@ -3,6 +3,7 @@ import 'dart:math';
 
 void main() => runApp(DiceRoll());
 
+
 class DiceRoll extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -51,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int min = 1;
 
 
+
   int getValue() {
     setState(() {
       Random rand = new Random();
@@ -58,6 +60,52 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     return diceValue;
   }
+
+  String retDice() {
+    switch (getValue()) {
+      case 1:
+        {
+          return 'asset/dice1.png';
+        }
+        break;
+
+      case 2:
+        {
+          return 'asset/dice2.png';
+        }
+        break;
+
+      case 3:
+        {
+          return 'asset/dice3.png';
+        }
+        break;
+
+      case 4:
+        {
+          return 'asset/dice4.png';
+        }
+        break;
+
+      case 5:
+        {
+          return 'asset/dice5.png';
+        }
+        break;
+
+      case 6:
+        {
+          return 'asset/dice6.png';
+        }
+        break;
+
+      default: return 'asset/dice1.png';
+      break;
+    }
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Image.asset(retDice()),
             Text(
               'You rolled a:',
             ),
