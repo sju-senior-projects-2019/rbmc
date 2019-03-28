@@ -1,44 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:the_mystic_woodv3/gametiles.dart';
 
 int x = 0;
 int y = 0;
 
 //Generates initial board
-List<List<GameTile>> grid = new List.generate(9, (i) => new List(5));
+List<List<String>> grid = new List.generate(9, (i) => new List(5));
 void generateBoard(){
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[0].length; j++) {
       if(i == 4 && j == 2){ // Tower location
-        grid[i][j] = new GameTile('asset/00.jpg', '0');
+        grid[i][j] = 'asset/05.jpg';
       }
       else if(i == 0 && j == 2){ // Earthly Gate Location
-        grid[i][j] = GameTile('asset/00.jpg', '0');
+        grid[i][j] = 'asset/04.jpg';
       }
       else if(i == 8 && j == 2){ // Enchanted Gate Location
-        grid[i][j] = GameTile('asset/00.jpg', '0');
+        grid[i][j] = 'asset/02.jpg';
       }
       else if(i < 4){ // Sets bottom of board to yellow(Earthly) tiles
-        grid[i][j] = GameTile('asset/00.jpg', '0');
+        grid[i][j] = 'asset/00.png';
       }
       else if(i > 4){ // Sets top of board to pink(Enchanted) tiles
-        grid[i][j] = GameTile('asset/00.jpg', '0');
+        grid[i][j] = 'asset/00.png';
       }
       else if(i == 4 && j > 2){ // Makes tiles to left of tower pink(Enchanted)
-        grid[i][j] = GameTile('asset/00.jpg', '0');
+        grid[i][j] = 'asset/00.png';
       }
       else if(i == 4 && j < 2){ // Makes tiles to right of tower yellow(Earthly)
-        grid[i][j] = GameTile('asset/00.jpg', '0');
+        grid[i][j] = 'asset/00.png';
       }
       else{ // Makes a dash if mistake occurs
-        grid[i][j] = GameTile('asset/00.jpg', '0');
+        grid[i][j] = "-";
       }
     }
   }
 }
 
 void playerSpawn(){
-  grid[0][2] = "x" as GameTile;
+  grid[0][2] = 'asset/pctest.jpg';
   x = 2;
   y = 0;
 }
@@ -47,7 +46,7 @@ void playerSpawn(){
 bool playerLocation(){
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[0].length; j++) {
-      if(grid[i][j] == "x"){
+      if(grid[i][j] == 'asset/pctest.jpg'){
         x = j;
         y = i;
         return true;
@@ -74,7 +73,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -89,28 +87,28 @@ class _MyHomePageState extends State<MyHomePage> {
   // on board
   void setTile(){
     if(y == 4 && x == 2){ // Tower location
-      grid[y][x] = GameTile('asset/00.jpg', '0');
+      grid[y][x] = 'asset/05.jpg';
     }
     else if(y == 0 && x == 2){ // Earthly Gate Location
-      grid[y][x] = new GameTile('asset/01.jpg', '1');
+      grid[y][x] = 'asset/04.jpg';
     }
     else if(y == 8 && x == 2){ // Enchanted Gate Location
-      grid[y][x] = new GameTile('asset/02.jpg', '2');
+      grid[y][x] = 'asset/02.jpg';
     }
     else if(y < 4){ // Sets bottom of board to yellow(Earthly) tiles
-      grid[y][x] = new GameTile('asset/03.jpg', '3');
+      grid[y][x] = 'asset/00.png';
     }
     else if(y > 4){ // Sets top of board to pink(Enchanted) tiles
-      grid[y][x] = new GameTile('asset/04.jpg', '4');
+      grid[y][x] = 'asset/00.png';
     }
     else if(y == 4 && x > 2){ // Makes tiles to left of tower pink(Enchanted)
-      grid[y][x] = new GameTile('asset/05.jpg', '5');
+      grid[y][x] = 'asset/00.png';
     }
     else if(y == 4 && x < 2){ // Makes tiles to right of tower yellow(Earthly)
-      grid[y][x] = new GameTile('asset/06.jpg', '6');
+      grid[y][x] = 'asset/00.png';
     }
     else{ // Makes a dash if mistake occurs
-      grid[y][x] = GameTile('asset/00.jpg', '0');
+      grid[y][x] = "-";
     }
   }
   //Move functions move the player based on direction of function
@@ -120,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void moveUp(){
     setState(() {
       setTile();
-      grid[y+1][x] = "x" as GameTile;
+      grid[y+1][x] = 'asset/pctest.jpg';
       playerLocation();
     });
   }
@@ -128,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void moveDown(){
     setState(() {
       setTile();
-      grid[y-1][x] = "x" as GameTile;
+      grid[y-1][x] = 'asset/pctest.jpg';
       playerLocation();
     });
   }
@@ -136,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void moveLeft(){
     setState(() {
       setTile();
-      grid[y][x+1] = "x" as GameTile;
+      grid[y][x+1] = 'asset/pctest.jpg';
       playerLocation();
     });
   }
@@ -144,13 +142,13 @@ class _MyHomePageState extends State<MyHomePage> {
   void moveRight(){
     setState(() {
       setTile();
-      grid[y][x-1] = "x" as GameTile;
+      grid[y][x-1] = 'asset/pctest.jpg';
       playerLocation();
     });
   }
 
   //Gives the board a (temporary) way of viewing the layout
-  /*String board2String(){
+  String board2String(){
     String board = "";
     for (int i = 8; i >= 0; i--) {
       for (int j = 4; j >= 0; j--) {
@@ -159,21 +157,19 @@ class _MyHomePageState extends State<MyHomePage> {
       board += "\n";
     }
     return board;
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(
-          title: Text(widget.title),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(board2String(),
-              textScaleFactor: 2.0, //Changes the font size  better way?
+            Image.asset(board2String()
             ),
             FlatButton(
               onPressed: moveUp,
@@ -219,7 +215,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-        ),
     );
   }
 
