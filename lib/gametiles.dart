@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
-class GameTile {
+class GameTile{
   String image;
   String id;
 
-  GameTile(String a, b, {this.image, this.id});
+  GameTile(this.image, this.id);
+
+  String getimg(){
+    return this.image;
+  }
 
 }
 

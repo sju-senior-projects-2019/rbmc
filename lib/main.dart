@@ -11,4 +11,5 @@ void main(){
     debugShowCheckedModeBanner: false,
     home: trialpage(),
   ));
+
 }
