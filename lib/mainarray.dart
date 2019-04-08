@@ -180,35 +180,108 @@ class _MyHomePageState extends State<MyHomePage> {
   //Replaces previous spot player was on with o, changes new tile player is on to x
   //x and y should be fixed
   //Changing y value moves up and down, x moves right or left
+  bool ruleCheck(int u, int d){
+    for (int i = 0; i < images.length; i++){
+      if (images[i].getY() == u && images[i].getX() == d){
+        print("true");
+        return getRestrictions(images[i].getImageURL(), u, d);
+
+      }
+    }
+    return false;
+  }
+
+  bool getRestrictions(String temp, int u, int d){
+    if (temp == 'asset/pink/3.png' || temp == 'asset/pink/4.png' || temp == 'asset/pink/5.png' ||
+        temp == 'asset/yellow/12.png' || temp == 'asset/yellow/14.png' || temp == 'asset/yellow/15.png'){
+      playerLocation();
+      if (d == (x-1)) {
+        print("true");
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    else if (temp == 'asset/pink/6.png' || temp == 'asset/pink/9.png' || temp == 'asset/pink/15.png' ||
+        temp == 'asset/yellow/11.png' || temp == 'asset/yellow/18.png' || temp == 'asset/yellow/20.png'){
+      playerLocation();
+      if (u == (y+1)) {
+        print("true");
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    else if (temp == 'asset/pink/7.png' || temp == 'asset/pink/12.png' || temp == 'asset/pink/16.png' ||
+        temp == 'asset/yellow/9.png' || temp == 'asset/yellow/13.png' || temp == 'asset/yellow/19.png'){
+      playerLocation();
+      if (d == (x+1)) {
+        print("true");
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    else if (temp == 'asset/pink/8.png' || temp == 'asset/pink/17.png' || temp == 'asset/pink/18.png' ||
+        temp == 'asset/yellow/4.png' || temp == 'asset/yellow/10.png' || temp == 'asset/yellow/16.png'){
+      playerLocation();
+      if (u == (y-1)) {
+        print("true");
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    else{
+      return false;
+    }
+  }
+
   void moveUp(){
     setState(() {
       setTile();
-      grid[y+1][x] = "x";
+      if (!ruleCheck((y+1), x)){
+        grid[y+1][x] = "x";
+      }
       playerLocation();
+      print("[" + (y).toString() + "], [" + x.toString() + "]");
     });
   }
 
   void moveDown(){
     setState(() {
       setTile();
-      grid[y-1][x] = "x";
+      if (!ruleCheck((y-1), x)){
+        grid[y-1][x] = "x";
+      }
       playerLocation();
+      print("[" + (y).toString() + "], [" + x.toString() + "]");
     });
   }
 
   void moveLeft(){
     setState(() {
       setTile();
-      grid[y][x+1] = "x";
+      if (!ruleCheck(y, (x+1))){
+        grid[y][x+1] = "x";
+      }
       playerLocation();
+      print("[" + (y).toString() + "], [" + x.toString() + "]");
     });
   }
 
   void moveRight(){
     setState(() {
       setTile();
-      grid[y][x-1] = "x";
+      if (!ruleCheck(y, (x-1))){
+        grid[y][x-1] = "x";
+      }
       playerLocation();
+      print("[" + (y).toString() + "], [" + x.toString() + "]");
     });
   }
 
@@ -235,13 +308,1548 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             children: <Widget>[
               buildBoard(),
-              //buttons(),
+              buttons(),
             ],
         ),
       ),
     );
   }
+  Widget tile84() {
+    if(grid[8][4] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[44].getImageURL());
+                }));
+              },
+              child: Image.asset(images[44].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[44].getImageURL());
+            }));
+          },
+          child: Image.asset(images[44].getImageURL())
+      );
+    }
+  }
 
+  Widget tile83() {
+    if(grid[8][3] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[43].getImageURL());
+                }));
+              },
+              child: Image.asset(images[43].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[43].getImageURL());
+            }));
+          },
+          child: Image.asset(images[43].getImageURL())
+      );
+    }
+  }
+
+  Widget tile82() {
+    if(grid[8][2] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[42].getImageURL());
+                }));
+              },
+              child: Image.asset(images[42].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[42].getImageURL());
+            }));
+          },
+          child: Image.asset(images[42].getImageURL())
+      );
+    }
+  }
+
+  Widget tile81() {
+    if(grid[8][1] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[41].getImageURL());
+                }));
+              },
+              child: Image.asset(images[41].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[41].getImageURL());
+            }));
+          },
+          child: Image.asset(images[41].getImageURL())
+      );
+    }
+  }
+
+  Widget tile80() {
+    if(grid[8][0] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[40].getImageURL());
+                }));
+              },
+              child: Image.asset(images[40].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[40].getImageURL());
+            }));
+          },
+          child: Image.asset(images[40].getImageURL())
+      );
+    }
+  }
+
+  Widget tile74() {
+    if(grid[7][4] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[39].getImageURL());
+                }));
+              },
+              child: Image.asset(images[39].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[39].getImageURL());
+            }));
+          },
+          child: Image.asset(images[39].getImageURL())
+      );
+    }
+  }
+
+  Widget tile73() {
+    if(grid[7][3] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[38].getImageURL());
+                }));
+              },
+              child: Image.asset(images[38].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[38].getImageURL());
+            }));
+          },
+          child: Image.asset(images[38].getImageURL())
+      );
+    }
+  }
+
+  Widget tile72() {
+    if(grid[7][2] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[37].getImageURL());
+                }));
+              },
+              child: Image.asset(images[37].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[37].getImageURL());
+            }));
+          },
+          child: Image.asset(images[37].getImageURL())
+      );
+    }
+  }
+
+  Widget tile71() {
+    if(grid[7][1] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[36].getImageURL());
+                }));
+              },
+              child: Image.asset(images[36].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[36].getImageURL());
+            }));
+          },
+          child: Image.asset(images[36].getImageURL())
+      );
+    }
+  }
+
+  Widget tile70() {
+    if(grid[7][0] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[35].getImageURL());
+                }));
+              },
+              child: Image.asset(images[35].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[35].getImageURL());
+            }));
+          },
+          child: Image.asset(images[35].getImageURL())
+      );
+    }
+  }
+
+  Widget tile64() {
+    if(grid[6][4] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[34].getImageURL());
+                }));
+              },
+              child: Image.asset(images[34].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[34].getImageURL());
+            }));
+          },
+          child: Image.asset(images[34].getImageURL())
+      );
+    }
+  }
+
+  Widget tile63() {
+    if(grid[6][3] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[33].getImageURL());
+                }));
+              },
+              child: Image.asset(images[33].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[33].getImageURL());
+            }));
+          },
+          child: Image.asset(images[33].getImageURL())
+      );
+    }
+  }
+
+  Widget tile62() {
+    if(grid[6][2] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[32].getImageURL());
+                }));
+              },
+              child: Image.asset(images[32].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[32].getImageURL());
+            }));
+          },
+          child: Image.asset(images[32].getImageURL())
+      );
+    }
+  }
+
+  Widget tile61() {
+    if(grid[6][1] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[31].getImageURL());
+                }));
+              },
+              child: Image.asset(images[31].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[31].getImageURL());
+            }));
+          },
+          child: Image.asset(images[31].getImageURL())
+      );
+    }
+  }
+
+  Widget tile60() {
+    if(grid[6][0] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[30].getImageURL());
+                }));
+              },
+              child: Image.asset(images[30].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[30].getImageURL());
+            }));
+          },
+          child: Image.asset(images[30].getImageURL())
+      );
+    }
+  }
+
+  Widget tile54() {
+    if(grid[5][4] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[29].getImageURL());
+                }));
+              },
+              child: Image.asset(images[29].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[29].getImageURL());
+            }));
+          },
+          child: Image.asset(images[29].getImageURL())
+      );
+    }
+  }
+
+  Widget tile53() {
+    if(grid[5][3] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[28].getImageURL());
+                }));
+              },
+              child: Image.asset(images[28].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[28].getImageURL());
+            }));
+          },
+          child: Image.asset(images[28].getImageURL())
+      );
+    }
+  }
+
+  Widget tile52() {
+    if(grid[5][2] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[27].getImageURL());
+                }));
+              },
+              child: Image.asset(images[27].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[27].getImageURL());
+            }));
+          },
+          child: Image.asset(images[27].getImageURL())
+      );
+    }
+  }
+
+  Widget tile51() {
+    if(grid[5][1] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[26].getImageURL());
+                }));
+              },
+              child: Image.asset(images[26].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[26].getImageURL());
+            }));
+          },
+          child: Image.asset(images[26].getImageURL())
+      );
+    }
+  }
+
+  Widget tile50() {
+    if(grid[5][0] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[25].getImageURL());
+                }));
+              },
+              child: Image.asset(images[25].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[25].getImageURL());
+            }));
+          },
+          child: Image.asset(images[25].getImageURL())
+      );
+    }
+  }
+
+  Widget tile44() {
+    if(grid[4][4] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[24].getImageURL());
+                }));
+              },
+              child: Image.asset(images[24].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[24].getImageURL());
+            }));
+          },
+          child: Image.asset(images[24].getImageURL())
+      );
+    }
+  }
+
+  Widget tile43() {
+    if(grid[4][3] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[23].getImageURL());
+                }));
+              },
+              child: Image.asset(images[23].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[23].getImageURL());
+            }));
+          },
+          child: Image.asset(images[23].getImageURL())
+      );
+    }
+  }
+
+  Widget tile42() {
+    if(grid[4][2] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[22].getImageURL());
+                }));
+              },
+              child: Image.asset(images[22].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[22].getImageURL());
+            }));
+          },
+          child: Image.asset(images[22].getImageURL())
+      );
+    }
+  }
+
+  Widget tile41() {
+    if(grid[4][1] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[21].getImageURL());
+                }));
+              },
+              child: Image.asset(images[21].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[21].getImageURL());
+            }));
+          },
+          child: Image.asset(images[21].getImageURL())
+      );
+    }
+  }
+
+  Widget tile40() {
+    if(grid[4][0] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[20].getImageURL());
+                }));
+              },
+              child: Image.asset(images[20].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[20].getImageURL());
+            }));
+          },
+          child: Image.asset(images[20].getImageURL())
+      );
+    }
+  }
+
+  Widget tile34() {
+    if(grid[3][4] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[19].getImageURL());
+                }));
+              },
+              child: Image.asset(images[19].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[19].getImageURL());
+            }));
+          },
+          child: Image.asset(images[19].getImageURL())
+      );
+    }
+  }
+
+  Widget tile33() {
+    if(grid[3][3] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[18].getImageURL());
+                }));
+              },
+              child: Image.asset(images[18].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[18].getImageURL());
+            }));
+          },
+          child: Image.asset(images[18].getImageURL())
+      );
+    }
+  }
+
+  Widget tile32() {
+    if(grid[3][2] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[17].getImageURL());
+                }));
+              },
+              child: Image.asset(images[17].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[17].getImageURL());
+            }));
+          },
+          child: Image.asset(images[17].getImageURL())
+      );
+    }
+  }
+
+  Widget tile31() {
+    if(grid[3][1] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[16].getImageURL());
+                }));
+              },
+              child: Image.asset(images[16].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[16].getImageURL());
+            }));
+          },
+          child: Image.asset(images[16].getImageURL())
+      );
+    }
+  }
+
+  Widget tile30() {
+    if(grid[3][0] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[15].getImageURL());
+                }));
+              },
+              child: Image.asset(images[15].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[15].getImageURL());
+            }));
+          },
+          child: Image.asset(images[15].getImageURL())
+      );
+    }
+  }
+
+  Widget tile24() {
+    if(grid[2][4] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[14].getImageURL());
+                }));
+              },
+              child: Image.asset(images[14].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[14].getImageURL());
+            }));
+          },
+          child: Image.asset(images[14].getImageURL())
+      );
+    }
+  }
+
+  Widget tile23() {
+    if(grid[2][3] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[13].getImageURL());
+                }));
+              },
+              child: Image.asset(images[13].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[13].getImageURL());
+            }));
+          },
+          child: Image.asset(images[13].getImageURL())
+      );
+    }
+  }
+
+  Widget tile22() {
+    if(grid[2][2] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[12].getImageURL());
+                }));
+              },
+              child: Image.asset(images[12].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[12].getImageURL());
+            }));
+          },
+          child: Image.asset(images[12].getImageURL())
+      );
+    }
+  }
+
+  Widget tile21() {
+    if(grid[2][1] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[11].getImageURL());
+                }));
+              },
+              child: Image.asset(images[11].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[11].getImageURL());
+            }));
+          },
+          child: Image.asset(images[11].getImageURL())
+      );
+    }
+  }
+
+  Widget tile20() {
+    if(grid[2][0] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[10].getImageURL());
+                }));
+              },
+              child: Image.asset(images[10].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[10].getImageURL());
+            }));
+          },
+          child: Image.asset(images[10].getImageURL())
+      );
+    }
+  }
+
+  Widget tile14() {
+    if(grid[1][4] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[9].getImageURL());
+                }));
+              },
+              child: Image.asset(images[9].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[9].getImageURL());
+            }));
+          },
+          child: Image.asset(images[9].getImageURL())
+      );
+    }
+  }
+
+  Widget tile13() {
+    if(grid[1][3] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[8].getImageURL());
+                }));
+              },
+              child: Image.asset(images[8].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[8].getImageURL());
+            }));
+          },
+          child: Image.asset(images[8].getImageURL())
+      );
+    }
+  }
+
+  Widget tile12() {
+    if(grid[1][2] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[7].getImageURL());
+                }));
+              },
+              child: Image.asset(images[7].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[7].getImageURL());
+            }));
+          },
+          child: Image.asset(images[7].getImageURL())
+      );
+    }
+  }
+
+  Widget tile11() {
+    if(grid[1][1] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[6].getImageURL());
+                }));
+              },
+              child: Image.asset(images[6].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[6].getImageURL());
+            }));
+          },
+          child: Image.asset(images[6].getImageURL())
+      );
+    }
+  }
+
+  Widget tile10() {
+    if(grid[1][0] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[5].getImageURL());
+                }));
+              },
+              child: Image.asset(images[5].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[5].getImageURL());
+            }));
+          },
+          child: Image.asset(images[5].getImageURL())
+      );
+    }
+  }
+
+  Widget tile04() {
+    if(grid[0][4] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[4].getImageURL());
+                }));
+              },
+              child: Image.asset(images[4].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[4].getImageURL());
+            }));
+          },
+          child: Image.asset(images[4].getImageURL())
+      );
+    }
+  }
+
+  Widget tile03() {
+    if(grid[0][3] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[3].getImageURL());
+                }));
+              },
+              child: Image.asset(images[3].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[3].getImageURL());
+            }));
+          },
+          child: Image.asset(images[3].getImageURL())
+      );
+    }
+  }
+
+  Widget tile02() {
+    if(grid[0][2] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[2].getImageURL());
+                }));
+              },
+              child: Image.asset(images[2].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[2].getImageURL());
+            }));
+          },
+          child: Image.asset(images[2].getImageURL())
+      );
+    }
+  }
+
+  Widget tile01() {
+    if(grid[0][1] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[1].getImageURL());
+                }));
+              },
+              child: Image.asset(images[1].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[1].getImageURL());
+            }));
+          },
+          child: Image.asset(images[1].getImageURL())
+      );
+    }
+  }
+
+  Widget tile00() {
+    if(grid[0][0] == "x"){
+      return Stack(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailScreen(url: images[0].getImageURL());
+                }));
+              },
+              child: Image.asset(images[0].getImageURL())
+          ),
+          Positioned(
+            right: 10.0,
+            left: 40.0,
+            bottom: 10.0,
+            top: 10.0,
+            child: Image.asset('asset/dot2.png'),
+          ),
+        ],
+      );
+    }
+    else{
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return DetailScreen(url: images[0].getImageURL());
+            }));
+          },
+          child: Image.asset(images[0].getImageURL())
+      );
+    }
+  }
+
+
+  /*Widget test2(){
+    for (int z = 0; z < images.length; z++){
+      Image.asset(images[z].getImageURL());
+    }
+  }*/
 
   Widget buildBoard() {
     return Expanded(child: GridView.count(
@@ -249,371 +1857,51 @@ class _MyHomePageState extends State<MyHomePage> {
       crossAxisCount: 5,
       childAspectRatio: 900.0 / 586.0,
       children: <Widget>[
-        //Stack(
-          //children: <Widget>[
-          GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[44].getImageURL());
-              }));
-            },
-            child: Image.asset(images[44].getImageURL())
-          ),
-
-          //],
-        //),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[43].getImageURL());
-              }));
-            },
-            child: Image.asset(images[43].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[42].getImageURL());
-              }));
-            },
-            child: Image.asset(images[42].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[41].getImageURL());
-              }));
-            },
-            child: Image.asset(images[41].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[40].getImageURL());
-              }));
-            },
-            child: Image.asset(images[40].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[39].getImageURL());
-              }));
-            },
-            child: Image.asset(images[39].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[38].getImageURL());
-              }));
-            },
-            child: Image.asset(images[38].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[37].getImageURL());
-              }));
-            },
-            child: Image.asset(images[37].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[36].getImageURL());
-              }));
-            },
-            child: Image.asset(images[36].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[35].getImageURL());
-              }));
-            },
-            child: Image.asset(images[35].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[34].getImageURL());
-              }));
-            },
-            child: Image.asset(images[34].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[33].getImageURL());
-              }));
-            },
-            child: Image.asset(images[33].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[32].getImageURL());
-              }));
-            },
-            child: Image.asset(images[32].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[31].getImageURL());
-              }));
-            },
-            child: Image.asset(images[31].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[30].getImageURL());
-              }));
-            },
-            child: Image.asset(images[30].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[29].getImageURL());
-              }));
-            },
-            child: Image.asset(images[29].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[28].getImageURL());
-              }));
-            },
-            child: Image.asset(images[28].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[27].getImageURL());
-              }));
-            },
-            child: Image.asset(images[27].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[26].getImageURL());
-              }));
-            },
-            child: Image.asset(images[26].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[25].getImageURL());
-              }));
-            },
-            child: Image.asset(images[25].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[24].getImageURL());
-              }));
-            },
-            child: Image.asset(images[24].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[23].getImageURL());
-              }));
-            },
-            child: Image.asset(images[23].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[22].getImageURL());
-              }));
-            },
-            child: Image.asset(images[22].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[21].getImageURL());
-              }));
-            },
-            child: Image.asset(images[21].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[20].getImageURL());
-              }));
-            },
-            child: Image.asset(images[20].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[19].getImageURL());
-              }));
-            },
-            child: Image.asset(images[19].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[18].getImageURL());
-              }));
-            },
-            child: Image.asset(images[18].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[17].getImageURL());
-              }));
-            },
-            child: Image.asset(images[17].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[16].getImageURL());
-              }));
-            },
-            child: Image.asset(images[16].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[15].getImageURL());
-              }));
-            },
-            child: Image.asset(images[15].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[14].getImageURL());
-              }));
-            },
-            child: Image.asset(images[14].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[13].getImageURL());
-              }));
-            },
-            child: Image.asset(images[13].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[12].getImageURL());
-              }));
-            },
-            child: Image.asset(images[12].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[11].getImageURL());
-              }));
-            },
-            child: Image.asset(images[11].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[10].getImageURL());
-              }));
-            },
-            child: Image.asset(images[10].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[9].getImageURL());
-              }));
-            },
-            child: Image.asset(images[9].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[8].getImageURL());
-              }));
-            },
-            child: Image.asset(images[8].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[7].getImageURL());
-              }));
-            },
-            child: Image.asset(images[7].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[6].getImageURL());
-              }));
-            },
-            child: Image.asset(images[6].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[5].getImageURL());
-              }));
-            },
-            child: Image.asset(images[5].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[4].getImageURL());
-              }));
-            },
-            child: Image.asset(images[4].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[3].getImageURL());
-              }));
-            },
-            child: Image.asset(images[3].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[2].getImageURL());
-              }));
-            },
-            child: Image.asset(images[2].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[1].getImageURL());
-              }));
-            },
-            child: Image.asset(images[1].getImageURL())
-        ),
-        GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return DetailScreen(url: images[0].getImageURL());
-              }));
-            },
-            child: Image.asset(images[0].getImageURL())
-        ),
+        tile84(),
+        tile83(),
+        tile82(),
+        tile81(),
+        tile80(),
+        tile74(),
+        tile73(),
+        tile72(),
+        tile71(),
+        tile70(),
+        tile64(),
+        tile63(),
+        tile62(),
+        tile61(),
+        tile60(),
+        tile54(),
+        tile53(),
+        tile52(),
+        tile51(),
+        tile50(),
+        tile44(),
+        tile43(),
+        tile42(),
+        tile41(),
+        tile40(),
+        tile34(),
+        tile33(),
+        tile32(),
+        tile31(),
+        tile30(),
+        tile24(),
+        tile23(),
+        tile22(),
+        tile21(),
+        tile20(),
+        tile14(),
+        tile13(),
+        tile12(),
+        tile11(),
+        tile10(),
+        tile04(),
+        tile03(),
+        tile02(),
+        tile01(),
+        tile00(),
         ],
       ),
     );

@@ -8,8 +8,20 @@ class pictoarray{
   int y;
   String imageURL;
   String id;
+  /*bool north;
+  bool south;
+  bool west;
+  bool east;*/
 
-  pictoarray(this.x, this.y, this.imageURL, this.id);
+  pictoarray(this.x, this.y, this.imageURL, this.id);//, this.north, this.south, this.west, this.east);
+
+  int getX(){
+    return this.x;
+  }
+
+  int getY(){
+    return this.y;
+  }
 
   String getImageURL(){
     return this.imageURL;
