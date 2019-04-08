@@ -67,45 +67,48 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
   String retDice() {
-    switch (getValue()) {
-      case 1:
-        {
+    for(int i = 0; i < 6; i++) {
+      switch (getValue()) {
+        case 1:
+          {
+            return 'asset/dice1.png';
+          }
+          break;
+
+        case 2:
+          {
+            return 'asset/dice2.png';
+          }
+          break;
+
+        case 3:
+          {
+            return 'asset/dice3.png';
+          }
+          break;
+
+        case 4:
+          {
+            return 'asset/dice4.png';
+          }
+          break;
+
+        case 5:
+          {
+            return 'asset/dice5.png';
+          }
+          break;
+
+        case 6:
+          {
+            return 'asset/dice6.png';
+          }
+          break;
+
+        default:
           return 'asset/dice1.png';
-        }
-        break;
-
-      case 2:
-        {
-          return 'asset/dice2.png';
-        }
-        break;
-
-      case 3:
-        {
-          return 'asset/dice3.png';
-        }
-        break;
-
-      case 4:
-        {
-          return 'asset/dice4.png';
-        }
-        break;
-
-      case 5:
-        {
-          return 'asset/dice5.png';
-        }
-        break;
-
-      case 6:
-        {
-          return 'asset/dice6.png';
-        }
-        break;
-
-      default: return 'asset/dice1.png';
-      break;
+          break;
+      }
     }
   }
 
