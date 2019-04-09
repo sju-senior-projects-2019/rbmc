@@ -8,12 +8,9 @@ class pictoarray{
   int y;
   String imageURL;
   String id;
-  /*bool north;
-  bool south;
-  bool west;
-  bool east;*/
+  bool hidden;
 
-  pictoarray(this.x, this.y, this.imageURL, this.id);//, this.north, this.south, this.west, this.east);
+  pictoarray(this.x, this.y, this.imageURL, this.id, this.hidden);
 
   int getX(){
     return this.x;
@@ -29,6 +26,14 @@ class pictoarray{
 
   String getID(){
     return this.id;
+  }
+
+  bool getHidden(){
+    return this.hidden;
+  }
+
+  void setHidden(bool h){
+    this.hidden = h;
   }
 
 }
