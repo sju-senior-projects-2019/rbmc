@@ -30,4 +30,5 @@ class pictoarray{
   String getID(){
     return this.id;
   }
+
 }
