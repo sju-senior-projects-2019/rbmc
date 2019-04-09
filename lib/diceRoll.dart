@@ -55,19 +55,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
   int getValue() {
-    setState(() {
-      Random rand = new Random();
-      diceValue = rand.nextInt(max - min + 1) + min;
+      setState(() {
+        for(int i = 0; i < 6; i++) {
+          Random rand = new Random();
+          diceValue = rand.nextInt(max - min + 1) + min;
 
-      Random rand2 = new Random();
-      diceValue2 = rand2.nextInt(max - min + 1) + min;
-    });
+          Random rand2 = new Random();
+          diceValue2 = rand2.nextInt(max - min + 1) + min;
+        }
+
+      });
+
     return diceValue;
   }
 
 
   String retDice() {
-    for(int i = 0; i < 6; i++) {
       switch (getValue()) {
         case 1:
           {
@@ -110,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
       }
     }
-  }
+
 
   String retDice2() {
     switch (diceValue2) {
