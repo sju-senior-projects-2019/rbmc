@@ -241,11 +241,91 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  bool upCheck(){
+    for (int i = 0; i < images.length; i++){
+      if (images[i].getY() == y && images[i].getX() == x){
+        print("true");
+        if (images[i].getImageURL() == 'asset/yellow/4.png' || images[i].getImageURL() == 'asset/yellow/10.png' ||
+            images[i].getImageURL() == 'asset/yellow/16.png' || images[i].getImageURL() == 'asset/pink/8.png' ||
+            images[i].getImageURL() == 'asset/pink/17.png' || images[i].getImageURL() == 'asset/pink/18.png'){
+          print("true");
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+    }
+    return false;
+  }
+
+  bool downCheck(){
+    for (int i = 0; i < images.length; i++){
+      if (images[i].getY() == y && images[i].getX() == x){
+        print("true");
+        if (images[i].getImageURL() == 'asset/yellow/11.png' || images[i].getImageURL() == 'asset/yellow/18.png' ||
+            images[i].getImageURL() == 'asset/yellow/20.png' || images[i].getImageURL() == 'asset/pink/6.png' ||
+            images[i].getImageURL() == 'asset/pink/9.png' || images[i].getImageURL() == 'asset/pink/15.png'){
+          print("true");
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+    }
+    return false;
+  }
+
+  bool leftCheck(){
+    for (int i = 0; i < images.length; i++){
+      if (images[i].getY() == y && images[i].getX() == x){
+        print("true");
+        if (images[i].getImageURL() == 'asset/yellow/12.png' || images[i].getImageURL() == 'asset/yellow/14.png' ||
+            images[i].getImageURL() == 'asset/yellow/15.png' || images[i].getImageURL() == 'asset/pink/3.png' ||
+            images[i].getImageURL() == 'asset/pink/4.png' || images[i].getImageURL() == 'asset/pink/5.png'){
+          print("true");
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+    }
+    return false;
+  }
+
+  bool rightCheck(){
+    for (int i = 0; i < images.length; i++){
+      if (images[i].getY() == y && images[i].getX() == x){
+        print("true");
+        if (images[i].getImageURL() == 'asset/yellow/9.png' || images[i].getImageURL() == 'asset/yellow/13.png' ||
+            images[i].getImageURL() == 'asset/yellow/19.png' || images[i].getImageURL() == 'asset/pink/7.png' ||
+            images[i].getImageURL() == 'asset/pink/12.png' || images[i].getImageURL() == 'asset/pink/16.png'){
+          print("true");
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+    }
+    return false;
+  }
+
   void moveUp(){
     setState(() {
       setTile();
-      if (!ruleCheck((y+1), x)){
-        grid[y+1][x] = "x";
+      if(!upCheck()) {
+        if (!ruleCheck((y + 1), x)) {
+          grid[y + 1][x] = "x";
+        }
+        else {
+          grid[y][x] = "x";
+        }
+      }
+      else{
+          grid[y][x] = "x";
       }
       playerLocation();
       print("[" + (y).toString() + "], [" + x.toString() + "]");
@@ -255,8 +335,16 @@ class _MyHomePageState extends State<MyHomePage> {
   void moveDown(){
     setState(() {
       setTile();
-      if (!ruleCheck((y-1), x)){
-        grid[y-1][x] = "x";
+      if(!downCheck()) {
+        if (!ruleCheck((y - 1), x)) {
+          grid[y - 1][x] = "x";
+        }
+        else {
+          grid[y][x] = "x";
+        }
+      }
+      else {
+        grid[y][x] = "x";
       }
       playerLocation();
       print("[" + (y).toString() + "], [" + x.toString() + "]");
@@ -266,8 +354,16 @@ class _MyHomePageState extends State<MyHomePage> {
   void moveLeft(){
     setState(() {
       setTile();
-      if (!ruleCheck(y, (x+1))){
-        grid[y][x+1] = "x";
+      if (!leftCheck()) {
+        if (!ruleCheck(y, (x + 1))) {
+          grid[y][x + 1] = "x";
+        }
+        else {
+          grid[y][x] = "x";
+        }
+      }
+      else {
+          grid[y][x] = "x";
       }
       playerLocation();
       print("[" + (y).toString() + "], [" + x.toString() + "]");
@@ -277,8 +373,16 @@ class _MyHomePageState extends State<MyHomePage> {
   void moveRight(){
     setState(() {
       setTile();
-      if (!ruleCheck(y, (x-1))){
-        grid[y][x-1] = "x";
+      if (!rightCheck()) {
+        if (!ruleCheck(y, (x - 1))) {
+          grid[y][x - 1] = "x";
+        }
+        else {
+          grid[y][x] = "x";
+        }
+      }
+      else{
+        grid[y][x] = "x";
       }
       playerLocation();
       print("[" + (y).toString() + "], [" + x.toString() + "]");
@@ -1812,35 +1916,35 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget tile00() {
     if(grid[0][0] == "x"){
-      return Stack(
-        children: <Widget>[
-          GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return DetailScreen(url: images[0].getImageURL());
-                }));
-              },
-              child: Image.asset(images[0].getImageURL())
-          ),
-          Positioned(
-            right: 10.0,
-            left: 40.0,
-            bottom: 10.0,
-            top: 10.0,
-            child: Image.asset('asset/dot2.png'),
-          ),
-        ],
-      );
+        return Stack(
+          children: <Widget>[
+            GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) {
+                    return DetailScreen(url: images[0].getImageURL());
+                  }));
+                },
+                child: Image.asset(images[0].getImageURL())
+            ),
+            Positioned(
+              right: 10.0,
+              left: 40.0,
+              bottom: 10.0,
+              top: 10.0,
+              child: Image.asset('asset/dot2.png'),
+            ),
+          ],
+        );
     }
     else{
-      return GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (_) {
-              return DetailScreen(url: images[0].getImageURL());
-            }));
-          },
-          child: Image.asset(images[0].getImageURL())
-      );
+        return GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (_) {
+                return DetailScreen(url: images[0].getImageURL());
+              }));
+            },
+            child: Image.asset(images[0].getImageURL())
+        );
     }
   }
 
