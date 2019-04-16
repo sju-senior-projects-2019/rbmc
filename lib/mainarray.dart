@@ -57,48 +57,84 @@ void createImages() {
 
 //Generates initial board
 List<List<String>> grid = new List.generate(9, (i) => new List(5));
+List<List<String>> grid1 = new List.generate(9, (i) => new List(5));
+List<List<String>> grid2 = new List.generate(9, (i) => new List(5));
+List<List<String>> grid3 = new List.generate(9, (i) => new List(5));
+List<List<String>> grid4 = new List.generate(9, (i) => new List(5));
 void generateBoard(){
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[0].length; j++) {
       if(i == 4 && j == 2){ // Tower location
         grid[i][j] = "T";
+        grid1[i][j] = "T";
+        grid2[i][j] = "T";
+        grid3[i][j] = "T";
+        grid4[i][j] = "T";
       }
       else if(i == 0 && j == 2){ // Earthly Gate Location
         grid[i][j] = "A";
+        grid1[i][j] = "A";
+        grid2[i][j] = "A";
+        grid3[i][j] = "A";
+        grid4[i][j] = "A";
       }
       else if(i == 8 && j == 2){ // Enchanted Gate Location
         grid[i][j] = "N";
+        grid1[i][j] = "N";
+        grid2[i][j] = "N";
+        grid3[i][j] = "N";
+        grid4[i][j] = "N";
       }
       else if(i < 4){ // Sets bottom of board to yellow(Earthly) tiles
         grid[i][j] = "y";
+        grid1[i][j] = "y";
+        grid2[i][j] = "y";
+        grid3[i][j] = "y";
+        grid4[i][j] = "y";
       }
       else if(i > 4){ // Sets top of board to pink(Enchanted) tiles
         grid[i][j] = "p";
+        grid1[i][j] = "p";
+        grid2[i][j] = "p";
+        grid3[i][j] = "p";
+        grid4[i][j] = "p";
       }
       else if(i == 4 && j > 2){ // Makes tiles to left of tower pink(Enchanted)
         grid[i][j] = "p";
+        grid1[i][j] = "p";
+        grid2[i][j] = "p";
+        grid3[i][j] = "p";
+        grid4[i][j] = "p";
       }
       else if(i == 4 && j < 2){ // Makes tiles to right of tower yellow(Earthly)
         grid[i][j] = "y";
+        grid1[i][j] = "y";
+        grid2[i][j] = "y";
+        grid3[i][j] = "y";
+        grid4[i][j] = "y";
       }
       else{ // Makes a dash if mistake occurs
         grid[i][j] = "-";
+        grid1[i][j] = "-";
+        grid2[i][j] = "-";
+        grid3[i][j] = "-";
+        grid4[i][j] = "-";
       }
     }
   }
 }
 
 void playerSpawn(){
-  grid[0][2] = "x";
+  grid1[0][2] = "x";
   x = 2;
   y = 0;
 }
 
 //To be implemented to find play position potentially replacing x and y variables
 bool playerLocation(){
-  for (int i = 0; i < grid.length; i++) {
-    for (int j = 0; j < grid[0].length; j++) {
-      if(grid[i][j] == "x"){
+  for (int i = 0; i < grid1.length; i++) {
+    for (int j = 0; j < grid1[0].length; j++) {
+      if(grid1[i][j] == "x"){
         x = j;
         y = i;
         return true;
@@ -113,15 +149,15 @@ void main(){
   randomize();
   createImages();
   playerSpawn();
-  runApp(MyApp());
+  runApp(mainarray());
 }
 
-class MyApp extends StatelessWidget {
+class mainarray extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '2D Array',
+      title: 'The Mystic Wood',
       home: MyHomePage(title: 'Main'),
     );
   }
@@ -141,28 +177,28 @@ class _MyHomePageState extends State<MyHomePage> {
   // on board
   void setTile(){
     if(y == 4 && x == 2){ // Tower location
-      grid[y][x] = "T";
+      grid1[y][x] = "T";
     }
     else if(y == 0 && x == 2){ // Earthly Gate Location
-      grid[y][x] = "A";
+      grid1[y][x] = "A";
     }
     else if(y == 8 && x == 2){ // Enchanted Gate Location
-      grid[y][x] = "N";
+      grid1[y][x] = "N";
     }
     else if(y < 4){ // Sets bottom of board to yellow(Earthly) tiles
-      grid[y][x] = "y";
+      grid1[y][x] = "y";
     }
     else if(y > 4){ // Sets top of board to pink(Enchanted) tiles
-      grid[y][x] = "p";
+      grid1[y][x] = "p";
     }
     else if(y == 4 && x > 2){ // Makes tiles to left of tower pink(Enchanted)
-      grid[y][x] = "p";
+      grid1[y][x] = "p";
     }
     else if(y == 4 && x < 2){ // Makes tiles to right of tower yellow(Earthly)
-      grid[y][x] = "y";
+      grid1[y][x] = "y";
     }
     else{ // Makes a dash if mistake occurs
-      grid[y][x] = "-";
+      grid1[y][x] = "-";
     }
   }
 
@@ -327,14 +363,14 @@ class _MyHomePageState extends State<MyHomePage> {
       if(!upCheck()) {
         checkHidden(y+1, x);
         if (!ruleCheck((y + 1), x)) {
-          grid[y + 1][x] = "x";
+          grid1[y + 1][x] = "x";
         }
         else {
-          grid[y][x] = "x";
+          grid1[y][x] = "x";
         }
       }
       else{
-          grid[y][x] = "x";
+          grid1[y][x] = "x";
       }
       playerLocation();
       print("[" + (y).toString() + "], [" + x.toString() + "]");
@@ -347,14 +383,14 @@ class _MyHomePageState extends State<MyHomePage> {
       if(!downCheck()) {
         checkHidden(y-1, x);
         if (!ruleCheck((y - 1), x)) {
-          grid[y - 1][x] = "x";
+          grid1[y - 1][x] = "x";
         }
         else {
-          grid[y][x] = "x";
+          grid1[y][x] = "x";
         }
       }
       else {
-        grid[y][x] = "x";
+        grid1[y][x] = "x";
       }
       playerLocation();
       print("[" + (y).toString() + "], [" + x.toString() + "]");
@@ -367,14 +403,14 @@ class _MyHomePageState extends State<MyHomePage> {
       if (!leftCheck()) {
         checkHidden(y, x+1);
         if (!ruleCheck(y, (x + 1))) {
-          grid[y][x + 1] = "x";
+          grid1[y][x + 1] = "x";
         }
         else {
-          grid[y][x] = "x";
+          grid1[y][x] = "x";
         }
       }
       else {
-          grid[y][x] = "x";
+          grid1[y][x] = "x";
       }
       playerLocation();
       print("[" + (y).toString() + "], [" + x.toString() + "]");
@@ -387,14 +423,14 @@ class _MyHomePageState extends State<MyHomePage> {
       if (!rightCheck()) {
         checkHidden(y, x-1);
         if (!ruleCheck(y, (x - 1))) {
-          grid[y][x - 1] = "x";
+          grid1[y][x - 1] = "x";
         }
         else {
-          grid[y][x] = "x";
+          grid1[y][x] = "x";
         }
       }
       else{
-        grid[y][x] = "x";
+        grid1[y][x] = "x";
       }
       playerLocation();
       print("[" + (y).toString() + "], [" + x.toString() + "]");
@@ -406,7 +442,7 @@ class _MyHomePageState extends State<MyHomePage> {
     String board = "";
     for (int i = 8; i >= 0; i--) {
       for (int j = 4; j >= 0; j--) {
-        board += grid[i][j] + "  ";
+        board += grid1[i][j] + "  ";
       }
       board += "\n";
     }
@@ -435,7 +471,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[8][4] == "x") {
+      if (grid1[8][4] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -475,7 +511,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[8][3] == "x") {
+      if (grid1[8][3] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -515,7 +551,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[8][2] == "x") {
+      if (grid1[8][2] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -555,7 +591,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[8][1] == "x") {
+      if (grid1[8][1] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -595,7 +631,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[8][0] == "x") {
+      if (grid1[8][0] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -635,7 +671,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[7][4] == "x") {
+      if (grid1[7][4] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -675,7 +711,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[7][3] == "x") {
+      if (grid1[7][3] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -715,7 +751,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[7][2] == "x") {
+      if (grid1[7][2] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -755,7 +791,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[7][1] == "x") {
+      if (grid1[7][1] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -795,7 +831,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[7][0] == "x") {
+      if (grid1[7][0] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -835,7 +871,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[6][4] == "x") {
+      if (grid1[6][4] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -875,7 +911,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[6][3] == "x") {
+      if (grid1[6][3] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -915,7 +951,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[6][2] == "x") {
+      if (grid1[6][2] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -955,7 +991,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[6][1] == "x") {
+      if (grid1[6][1] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -995,7 +1031,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[6][0] == "x") {
+      if (grid1[6][0] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1035,7 +1071,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[5][4] == "x") {
+      if (grid1[5][4] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1075,7 +1111,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[5][3] == "x") {
+      if (grid1[5][3] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1115,7 +1151,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[5][2] == "x") {
+      if (grid1[5][2] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1155,7 +1191,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[5][1] == "x") {
+      if (grid1[5][1] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1195,7 +1231,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[5][0] == "x") {
+      if (grid1[5][0] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1235,7 +1271,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[4][4] == "x") {
+      if (grid1[4][4] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1275,7 +1311,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[4][3] == "x") {
+      if (grid1[4][3] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1315,7 +1351,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[4][2] == "x") {
+      if (grid1[4][2] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1355,7 +1391,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[4][1] == "x") {
+      if (grid1[4][1] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1395,7 +1431,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[4][0] == "x") {
+      if (grid1[4][0] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1435,7 +1471,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[3][4] == "x") {
+      if (grid1[3][4] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1475,7 +1511,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[3][3] == "x") {
+      if (grid1[3][3] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1515,7 +1551,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[3][2] == "x") {
+      if (grid1[3][2] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1555,7 +1591,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[3][1] == "x") {
+      if (grid1[3][1] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1595,7 +1631,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[3][0] == "x") {
+      if (grid1[3][0] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1635,7 +1671,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[2][4] == "x") {
+      if (grid1[2][4] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1675,7 +1711,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[2][3] == "x") {
+      if (grid1[2][3] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1715,7 +1751,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[2][2] == "x") {
+      if (grid1[2][2] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1755,7 +1791,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[2][1] == "x") {
+      if (grid1[2][1] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1795,7 +1831,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[2][0] == "x") {
+      if (grid1[2][0] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1835,7 +1871,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[1][4] == "x") {
+      if (grid1[1][4] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1875,7 +1911,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[1][3] == "x") {
+      if (grid1[1][3] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1915,7 +1951,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[1][2] == "x") {
+      if (grid1[1][2] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1955,7 +1991,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[1][1] == "x") {
+      if (grid1[1][1] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -1995,7 +2031,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[1][0] == "x") {
+      if (grid1[1][0] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -2035,7 +2071,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[0][4] == "x") {
+      if (grid1[0][4] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -2075,7 +2111,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[0][3] == "x") {
+      if (grid1[0][3] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -2115,7 +2151,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[0][2] == "x") {
+      if (grid1[0][2] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -2155,7 +2191,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[0][1] == "x") {
+      if (grid1[0][1] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
@@ -2195,7 +2231,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Image.asset('asset/Hidden.png');
     }
     else {
-      if (grid[0][0] == "x") {
+      if (grid1[0][0] == "x") {
         return Stack(
           children: <Widget>[
             GestureDetector(
