@@ -5,7 +5,6 @@ void main(){
   generateBoard();
   randomize();
   createImages();
-  playerSpawn();
   runApp(MyApp());
 }
 
@@ -36,15 +35,55 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: RaisedButton(
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (BuildContext context) => mainarray()
-              ),
-            );
-          }
+      body: new Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          RaisedButton(
+            child: const Text("1"),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => mainarray(playerNumber: 1,)
+                ),
+              );
+            }
+          ),
+          RaisedButton(
+              child: const Text("2"),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => mainarray(playerNumber: 2,)
+                  ),
+                );
+              }
+          ),
+          RaisedButton(
+              child: const Text("3"),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => mainarray(playerNumber: 3,)
+                  ),
+                );
+              }
+          ),
+          RaisedButton(
+              child: const Text("4"),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => mainarray(playerNumber: 4,)
+                  ),
+                );
+              }
+          ),
+        ],
       ),
     );
   }
