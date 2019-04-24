@@ -5,6 +5,7 @@ void main(){
   generateBoard();
   randomize();
   createImages();
+  generateTiles();
   runApp(MyApp());
 }
 
