@@ -51,21 +51,18 @@ class _MyHomePageState extends State<MyHomePage> {
   int diceValue2 = 0;
   int max = 6;
   int min = 1;
+  var rand = new Random();
+  var rand2 = new Random();
 
 
 
   int getValue() {
       setState(() {
-        for(int i = 0; i < 6; i++) {
-          Random rand = new Random();
+        for(int i = 0; i < 15; i++) {
           diceValue = rand.nextInt(max - min + 1) + min;
-
-          Random rand2 = new Random();
           diceValue2 = rand2.nextInt(max - min + 1) + min;
         }
-
       });
-
     return diceValue;
   }
 
@@ -76,87 +73,90 @@ class _MyHomePageState extends State<MyHomePage> {
           {
             return 'asset/dice1.png';
           }
-          break;
 
         case 2:
           {
             return 'asset/dice2.png';
           }
-          break;
 
         case 3:
           {
             return 'asset/dice3.png';
           }
-          break;
 
         case 4:
           {
             return 'asset/dice4.png';
           }
-          break;
 
         case 5:
           {
             return 'asset/dice5.png';
           }
-          break;
 
         case 6:
           {
             return 'asset/dice6.png';
           }
-          break;
 
         default:
           return 'asset/dice1.png';
-          break;
       }
-    }
+  }
 
 
   String retDice2() {
-    switch (diceValue2) {
-      case 1:
-        {
+      switch (diceValue2) {
+        case 1:
+          {
+            return 'asset/dice1.png';
+          }
+
+        case 2:
+          {
+            return 'asset/dice2.png';
+          }
+
+        case 3:
+          {
+            return 'asset/dice3.png';
+          }
+
+        case 4:
+          {
+            return 'asset/dice4.png';
+          }
+
+        case 5:
+          {
+            return 'asset/dice5.png';
+          }
+
+        case 6:
+          {
+            return 'asset/dice6.png';
+          }
+
+        default:
           return 'asset/dice1.png';
-        }
-        break;
-
-      case 2:
-        {
-          return 'asset/dice2.png';
-        }
-        break;
-
-      case 3:
-        {
-          return 'asset/dice3.png';
-        }
-        break;
-
-      case 4:
-        {
-          return 'asset/dice4.png';
-        }
-        break;
-
-      case 5:
-        {
-          return 'asset/dice5.png';
-        }
-        break;
-
-      case 6:
-        {
-          return 'asset/dice6.png';
-        }
-        break;
-
-      default: return 'asset/dice1.png';
-      break;
-    }
+      }
   }
+
+  String LoopImage(){
+    for(int w = 0; w < 15; w++){
+      retDice();
+      return retDice();
+    }
+    return retDice();
+  }
+
+  String LoopImage2(){
+    for(int w = 0; w < 15; w++){
+      retDice2();
+    }
+    return retDice2();
+  }
+
 
 
 
@@ -195,8 +195,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Image.asset(retDice(), width: 56.0, height: 56.0),
-            Image.asset(retDice2(), width: 56.0, height: 56.0),
+            Image.asset(LoopImage(), width: 56.0, height: 56.0),
+            Image.asset(LoopImage2(), width: 56.0, height: 56.0),
             Text(
               'You rolled a:',
             ),
