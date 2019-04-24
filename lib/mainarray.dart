@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:the_mystic_woodv3/pictoarrary.dart';
 import 'package:the_mystic_woodv3/tiles.dart';
+import 'players.dart';
 
 int x = 0;
 int y = 0;
@@ -16,6 +17,8 @@ int y3 = 0;
 
 int x4 = 0;
 int y4 = 0;
+
+int playersTurn = 1;
 
 int pnum = 1;
 int pnumMax = 0;
@@ -147,9 +150,30 @@ void generateBoard(){
   }
 }
 
+List<players> player = new List();
+void createPlayers(){
+  for(int i = 0; i < 4; i++){
+    player.add(new players(2, 0, i+1));
+  }
+}
+
 //Puts each player in their starting location (Y:0, X:2 or the Earthly Gate)
 //Only puts players on the board based on the number of players in the game
 void playerSpawn(int numPlayers){
+  if (numPlayers == 1){
+    player.removeAt(3);
+    player.removeAt(2);
+    player.removeAt(1);
+  }
+  else if (numPlayers == 2){
+    player.removeAt(3);
+    player.removeAt(2);
+  }
+  else if (numPlayers == 3){
+    player.removeAt(3);
+  }
+  //pnumMax = numPlayers;
+  /*
   if(numPlayers == 1) {
     grid1[0][2] = "x";
     x1 = 2;
@@ -197,11 +221,13 @@ void playerSpawn(int numPlayers){
   else{
 
   }
-  pnumMax = numPlayers;
+  pnumMax = numPlayers; */
 }
 
 //Finds player position
-void playerLocation(){
+void playerLocation(int whichPlayer){
+  //might not be needed
+  /*
   for (int i = 0; i < grid1.length; i++) {
     for (int j = 0; j < grid1[0].length; j++) {
       if(grid1[i][j] == "x"){
@@ -221,7 +247,7 @@ void playerLocation(){
         y4 = i;
       }
     }
-  }
+  }*/
 }
 
 List<tiles> space = new List(45);
@@ -236,7 +262,6 @@ void generateTiles(){
     }
   }
 }
-
 
 
 //This is ignored if the app is run through the Main Menu
@@ -282,7 +307,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // Certain locations are set while others are just a color based on position
   // on board
   //This function has been updated to restore the String arrays for each of the 4 players
-  void setTile(int player){
+  /*void setTile(int player){
     if(player == 1) {
       if (y1 == 4 && x1 == 2) { // Tower location
         grid1[y1][x1] = "T";
@@ -390,7 +415,7 @@ class _MyHomePageState extends State<MyHomePage> {
     else{
 
     }
-  }
+  }*/
 
   // Not currently in use/May not be needed
   List<String> image2Board(){
@@ -406,11 +431,11 @@ class _MyHomePageState extends State<MyHomePage> {
   //Replaces previous spot player was on with o, changes new tile player is on to x
   //x and y should be fixed
   //Changing y value moves up and down, x moves right or left
-  bool ruleCheck(int u, int d){
+  bool ruleCheck(int u, int d, players p){
     for (int i = 0; i < images.length; i++){
       if (images[i].getY() == u && images[i].getX() == d){
         print("true");
-        return getRestrictions(images[i].getImageURL(), u, d);
+        return getRestrictions(images[i].getImageURL(), u, d, p);
 
       }
     }
@@ -418,11 +443,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   //Used to check if a player is allowed to move onto a tile or not
-  bool getRestrictions(String temp, int u, int d){
+  bool getRestrictions(String temp, int u, int d, players p){
     if (temp == 'asset/pink/3.png' || temp == 'asset/pink/4.png' || temp == 'asset/pink/5.png' ||
         temp == 'asset/yellow/12.png' || temp == 'asset/yellow/14.png' || temp == 'asset/yellow/15.png'){
-      playerLocation();
-      if (d == (x1-1)) {
+      //playerLocation();
+      if (d == (p.getX() - 1)) {
         print("true");
         return true;
       }
@@ -432,8 +457,8 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     else if (temp == 'asset/pink/6.png' || temp == 'asset/pink/9.png' || temp == 'asset/pink/15.png' ||
         temp == 'asset/yellow/11.png' || temp == 'asset/yellow/18.png' || temp == 'asset/yellow/20.png'){
-      playerLocation();
-      if (u == (y1+1)) {
+      //playerLocation();
+      if (u == (p.getY() + 1)) {
         print("true");
         return true;
       }
@@ -443,8 +468,8 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     else if (temp == 'asset/pink/7.png' || temp == 'asset/pink/12.png' || temp == 'asset/pink/16.png' ||
         temp == 'asset/yellow/9.png' || temp == 'asset/yellow/13.png' || temp == 'asset/yellow/19.png'){
-      playerLocation();
-      if (d == (x1+1)) {
+      //playerLocation();
+      if (d == (p.getX() + 1)) {
         print("true");
         return true;
       }
@@ -454,8 +479,8 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     else if (temp == 'asset/pink/8.png' || temp == 'asset/pink/17.png' || temp == 'asset/pink/18.png' ||
         temp == 'asset/yellow/4.png' || temp == 'asset/yellow/10.png' || temp == 'asset/yellow/16.png'){
-      playerLocation();
-      if (u == (y1-1)) {
+      //playerLocation();
+      if (u == (p.getY() - 1)) {
         print("true");
         return true;
       }
@@ -469,9 +494,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   //Checked to see if the player can move up from their current tile
-  bool upCheck(){
+  bool upCheck(players p){
     for (int i = 0; i < images.length; i++){
-      if (images[i].getY() == y1 && images[i].getX() == x1){
+      if (images[i].getY() == p.getY() && images[i].getX() == p.getX()){
         print("true");
         if (images[i].getImageURL() == 'asset/yellow/4.png' || images[i].getImageURL() == 'asset/yellow/10.png' ||
             images[i].getImageURL() == 'asset/yellow/16.png' || images[i].getImageURL() == 'asset/pink/8.png' ||
@@ -488,9 +513,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   //Checked to see if the player can move down from their current tile
-  bool downCheck(){
+  bool downCheck(players p){
     for (int i = 0; i < images.length; i++){
-      if (images[i].getY() == y1 && images[i].getX() == x1){
+      if (images[i].getY() == p.getY() && images[i].getX() == p.getX()){
         print("true");
         if (images[i].getImageURL() == 'asset/yellow/11.png' || images[i].getImageURL() == 'asset/yellow/18.png' ||
             images[i].getImageURL() == 'asset/yellow/20.png' || images[i].getImageURL() == 'asset/pink/6.png' ||
@@ -507,9 +532,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   //Checked to see if the player can move left from their current tile
-  bool leftCheck(){
+  bool leftCheck(players p){
     for (int i = 0; i < images.length; i++){
-      if (images[i].getY() == y1 && images[i].getX() == x1){
+      if (images[i].getY() == p.getY() && images[i].getX() == p.getX()){
         print("true");
         if (images[i].getImageURL() == 'asset/yellow/12.png' || images[i].getImageURL() == 'asset/yellow/14.png' ||
             images[i].getImageURL() == 'asset/yellow/15.png' || images[i].getImageURL() == 'asset/pink/3.png' ||
@@ -526,9 +551,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   //Checked to see if the player can move right from their current tile
-  bool rightCheck(){
+  bool rightCheck(players p){
     for (int i = 0; i < images.length; i++){
-      if (images[i].getY() == y1 && images[i].getX() == x1){
+      if (images[i].getY() == p.getY() && images[i].getX() == p.getX()){
         print("true");
         if (images[i].getImageURL() == 'asset/yellow/9.png' || images[i].getImageURL() == 'asset/yellow/13.png' ||
             images[i].getImageURL() == 'asset/yellow/19.png' || images[i].getImageURL() == 'asset/pink/7.png' ||
@@ -557,106 +582,117 @@ class _MyHomePageState extends State<MyHomePage> {
   //Performs multiple checks to see if movement onto new tile is possible
   void moveUp(){
     setState(() {
-      setTile(pnum);
-      if(pnum == 1) {
-        if (!upCheck()) {
-          checkHidden(y1 + 1, x1);
-          if (!ruleCheck((y1 + 1), x1)) {
-            grid1[y1 + 1][x1] = "x";
-          }
-          else {
-            grid1[y1][x1] = "x";
-          }
-        }
-        else {
-          grid1[y1][x1] = "x";
-        }
-        playerLocation();
-        print("[" + (y1).toString() + "], [" + x1.toString() + "]");
-      }
-      else if(pnum == 2) {
-        if (!upCheck()) {
-          checkHidden(y + 1, x);
-          if (!ruleCheck((y + 1), x)) {
-            grid1[y + 1][x] = "x";
-          }
-          else {
-            grid1[y][x] = "x";
+      //setTile(pnum);
+      for(int i = 0; i < player.length; i++){
+        if(player[i].getPlayerNumber() == playersTurn){
+          if (!upCheck(player[i])) {
+            checkHidden(player[i].getY() + 1, player[i].getX());
+            if (!ruleCheck((player[i].getY() + 1), player[i].getX(), player[i])) {
+              if (!(player[i].getY() + 1 >= 9)){
+                player[i].setY(player[i].getY() + 1);
+              }
+              //grid1[y1 + 1][x1] = "x";
+            }
+          //playerLocation();
+          print("[" + (player[i].getY()).toString() + "], [" + (player[i].getX()).toString() + "]");
           }
         }
-        else {
-          grid1[y][x] = "x";
-        }
-        playerLocation();
-        print("[" + (y).toString() + "], [" + x.toString() + "]");
       }
     });
+    if(playersTurn + 1 <= player.length){
+      playersTurn = playersTurn + 1;
+    }
+    else{
+      playersTurn = 1;
+    }
   }
 
   //Method to move the player down
   //Performs multiple checks to see if movement onto new tile is possible
   void moveDown(){
     setState(() {
-      setTile(1);
-      if(!downCheck()) {
-        checkHidden(y1-1, x1);
-        if (!ruleCheck((y1 - 1), x1)) {
-          grid1[y1 - 1][x1] = "x";
-        }
-        else {
-          grid1[y1][x1] = "x";
+      //setTile(1);
+      for(int i = 0; i < player.length; i++) {
+        if (player[i].getPlayerNumber() == playersTurn) {
+          if (!downCheck(player[i])) {
+            checkHidden(player[i].getY() - 1, player[i].getX());
+            if (!ruleCheck((player[i].getY() - 1), player[i].getX(), player[i])) {
+              if (!(player[i].getY() - 1 < 0)){
+                player[i].setY(player[i].getY() - 1);
+              }
+              //grid1[player[i].getY() - 1][x1] = "x";
+            }
+            //playerLocation();
+            print("[" + (player[i].getY()).toString() + "], [" +
+                (player[i].getX()).toString() + "]");
+          }
         }
       }
-      else {
-        grid1[y1][x1] = "x";
-      }
-      playerLocation();
-      print("[" + (y1).toString() + "], [" + x1.toString() + "]");
     });
+    if(playersTurn + 1 <= player.length){
+      playersTurn = playersTurn + 1;
+    }
+    else{
+      playersTurn = 1;
+    }
   }
 
   //Method to move the player left
   //Performs multiple checks to see if movement onto new tile is possible
   void moveLeft(){
     setState(() {
-      setTile(1);
-      if (!leftCheck()) {
-        checkHidden(y1, x1+1);
-        if (!ruleCheck(y1, (x1 + 1))) {
-          grid1[y1][x1 + 1] = "x";
-        }
-        else {
-          grid1[y1][x1] = "x";
+      //setTile(1);
+      for(int i = 0; i < player.length; i++) {
+        if (player[i].getPlayerNumber() == playersTurn) {
+          if (!leftCheck(player[i])) {
+            checkHidden(player[i].getY(), player[i].getX() + 1);
+            if (!ruleCheck(player[i].getY(), (player[i].getX() + 1), player[i])) {
+              if (!(player[i].getX() + 1 >= 5)){
+                player[i].setX(player[i].getX() + 1);
+              }
+              //grid1[y1][x1 + 1] = "x";
+            }
+            //playerLocation();
+            print("[" + (player[i].getY()).toString() + "], [" + (player[i].getX()).toString() + "]");
+          }
         }
       }
-      else {
-          grid1[y1][x1] = "x";
-      }
-      playerLocation();
-      print("[" + (y1).toString() + "], [" + x1.toString() + "]");
     });
+    if(playersTurn + 1 <= player.length){
+      playersTurn = playersTurn + 1;
+    }
+    else{
+      playersTurn = 1;
+    }
   }
 
   //Method to move the player right
   //Performs multiple checks to see if movement onto new tile is possible
   void moveRight(){
     setState(() {
-      setTile(1);
-      if (!rightCheck()) {
-        checkHidden(y1, x1-1);
-        if (!ruleCheck(y1, (x1 - 1))) {
-          grid1[y1][x1 - 1] = "x";
+      //setTile(1);
+      for(int i = 0; i < player.length; i++) {
+        if (player[i].getPlayerNumber() == playersTurn) {
+          if (!rightCheck(player[i])) {
+            checkHidden(player[i].getY(), player[i].getX() - 1);
+            if (!ruleCheck(player[i].getY(), (player[i].getX() - 1), player[i])) {
+              if(!(player[i].getX() - 1 < 0)){
+                player[i].setX(player[i].getX() - 1);
+              }
+              //grid1[y1][x1 - 1] = "x";
+            }
+          }
         }
-        else {
-          grid1[y1][x1] = "x";
-        }
+        //playerLocation();
+        print("[" + (y1).toString() + "], [" + x1.toString() + "]");
       }
-      else{
-        grid1[y1][x1] = "x";
-      }
-      playerLocation();
-      print("[" + (y1).toString() + "], [" + x1.toString() + "]");
     });
+    if(playersTurn + 1 <= player.length){
+      playersTurn = playersTurn + 1;
+    }
+    else{
+      playersTurn = 1;
+    }
   }
 
   //Gives the board a way of viewing the layout with letters
@@ -802,6 +838,7 @@ class _MyHomePageState extends State<MyHomePage> {
       );
    }
 }
+
 class DetailScreen extends StatefulWidget {
   final String url;
   final int players;
