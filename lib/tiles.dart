@@ -764,11 +764,8 @@ class tiles{
                   child: Image.asset(images[this.tileNumber].getImageURL())
               ),
               Positioned(
-                
                 left: 40.0,
-                
-                
-                child: Image.asset('asset/dot2.png'),
+                child: Image.asset('asset/dot.png'),
               ),
             ],
           );
@@ -788,16 +785,10 @@ class tiles{
                   child: Image.asset(images[this.tileNumber].getImageURL())
               ),
               Positioned(
-                
                 left: 40.0,
-                
-                
-                child: Image.asset('asset/dot2.png'),
+                child: Image.asset('asset/dot.png'),
               ),
               Positioned(
-                
-                
-                
                 top: 40.0,
                 child: Image.asset('asset/dot2.png'),
               ),
@@ -819,9 +810,6 @@ class tiles{
                   child: Image.asset(images[this.tileNumber].getImageURL())
               ),
               Positioned(
-                
-                
-                
                 top: 40.0,
                 child: Image.asset('asset/dot2.png'),
               ),
@@ -855,11 +843,8 @@ class tiles{
                   child: Image.asset(images[this.tileNumber].getImageURL())
               ),
               Positioned(
-                
                 left: 40.0,
-                
-                
-                child: Image.asset('asset/dot2.png'),
+                child: Image.asset('asset/dot.png'),
               ),
             ],
           );
