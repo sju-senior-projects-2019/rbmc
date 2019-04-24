@@ -60,9 +60,24 @@ class trialpageState extends State<trialpage>{
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+
+                      new Expanded(child:
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, new MaterialPageRoute(builder: (_) => MyApp()),);
+                        },
+                      ),
+                      ),
                       LinearProgressIndicator(backgroundColor: Colors.red,),
                       Padding(padding: EdgeInsets.only(top: 20.0),),
                       Text("Embarking on Journey", style: TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold),),
+                      new Expanded(child:
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, new MaterialPageRoute(builder: (_) => MyApp()),);
+                        },
+                      ),
+                      ),
                     ],
                   ),
               ),
