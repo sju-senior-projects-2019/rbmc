@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:the_mystic_woodv3/mainMenu.dart';
+import 'package:the_mystic_woodv3/mainarray.dart';
+import 'package:the_mystic_woodv3/pictoarrary.dart';
+
 
 class trialpage extends StatefulWidget{
   @override
@@ -19,13 +23,13 @@ class trialpageState extends State<trialpage>{
     return Scaffold(
       body: Stack(
         fit : StackFit.expand,
-
         children: <Widget>[
           Container(
             decoration: BoxDecoration(image: DecorationImage(
                 image: AssetImage('asset/img/0X.jpg'), fit: BoxFit.fill),
             ),
           ),
+
 
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -36,6 +40,13 @@ class trialpageState extends State<trialpage>{
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      new Expanded(child:
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, new MaterialPageRoute(builder: (_) => MyApp()),);
+                        },
+                      ),
+                      ),
 
                       Padding(padding: EdgeInsets.only(top:20.0),),
 
@@ -53,8 +64,8 @@ class trialpageState extends State<trialpage>{
                       Padding(padding: EdgeInsets.only(top: 20.0),),
                       Text("Embarking on Journey", style: TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.bold),),
                     ],
-                  )
-              )
+                  ),
+              ),
 
             ],
           )
