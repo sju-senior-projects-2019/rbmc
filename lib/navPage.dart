@@ -8,7 +8,8 @@ void main(){
   generateBoard();
   randomize();
   createImages();
-  playerSpawn();
+  createPlayers();
+  generateTiles();
   runApp(new navPage());
 }
 
